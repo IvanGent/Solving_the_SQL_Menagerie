@@ -54,7 +54,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT population_estimate_2018
+FROM cities
+WHERE city = 'San Diego';
 \echo ========= Problem 3.2 ====================================================
 \echo
 /*
@@ -64,7 +66,9 @@ FROM airports;
 */
 
  -- your query here
-
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE city IN ('Phoenix', 'Jacksonville', 'Charlotte', 'Nashville');
 \echo ========= Problem 3.3 ====================================================
 \echo
 /*
@@ -74,7 +78,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE population_estimate_2018 BETWEEN 800000 AND 900000;
 \echo ========= Problem 3.4 ====================================================
 \echo
 /*
@@ -84,7 +90,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city
+FROM cities
+WHERE population_estimate_2018 >= 1000000;
 \echo ========= Problem 3.5 ====================================================
 \echo
 /*
@@ -94,7 +102,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, population_estimate_2018 / 1000000 as pop_estimate_millions
+FROM cities
+WHERE state = 'Texas';
 \echo ========= Problem 3.6 ====================================================
 \echo
 /*
@@ -107,7 +117,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, population_estimate_2018
+FROM cities
+WHERE state NOT IN ('New York', 'California', 'Texas');
 \echo ========= Problem 3.7 ====================================================
 \echo
 /*
@@ -118,7 +130,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, state, population_estimate_2018
+FROM cities
+WHERE city LIKE 'S%';
 \echo ========= Problem 3.8 ====================================================
 \echo
 /*
@@ -129,7 +143,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, land_area_sq_mi_2016, population_estimate_2018
+FROM cities
+WHERE (land_area_sq_mi_2016 > 400) OR (population_estimate_2018 > 2000000);
 \echo ========= Problem 3.9 ====================================================
 \echo
 /*
@@ -140,7 +156,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, land_area_sq_mi_2016, population_estimate_2018
+FROM cities
+WHERE (land_area_sq_mi_2016 > 400 OR population_estimate_2018 > 2000000) AND NOT (land_area_sq_mi_2016 > 400 AND population_estimate_2018 > 2000000);
 \echo ========= Problem 3.10 ===================================================
 \echo
 /*
@@ -151,7 +169,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT city, population_estimate_2018, population_census_2010
+FROM cities
+WHERE (population_estimate_2018 - population_census_2010) > 200000;
 ---- Phase 4: Use a JOIN operation ---------------------------------------------
 -- Retrieve rows from multiple tables joining on a foreign key.
 -- The "airports" table has a foreign key called city_id that references the id
@@ -166,7 +186,9 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT name, city
+FROM airports
+INNER JOIN cities ON (airports.city_id = cities.id);
 \echo ========= Problem 4.2 ====================================================
 \echo
 /*
@@ -178,7 +200,10 @@ FROM airports;
 */
 
 -- your query here
-
+SELECT COUNT(*)
+FROM airports
+INNER JOIN cities ON (airports.city_id = cities.id)
+WHERE city = 'New York';
 --------------------------------------------------------------------------------
 ---- Bonuses:
 --------------------------------------------------------------------------------
